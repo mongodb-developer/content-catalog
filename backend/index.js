@@ -54,7 +54,30 @@ app.get("/search/:query", async (req, res) => {
   let results = [];
   try {
     /** TODO: Update this to use Atlas Search */
-    results = await itemCollection.find({name: req.params.query}).toArray();
+    /** TODO: Update this to use Atlas Search */
+    results = await itemCollection.aggregate([
+      { $search: {
+          index: 'default',
+          compound: {
+            must: [
+              {text: {
+                query: req.params.query,
+                path: ["name", "brand", "category", "tags"],
+                fuzzy: {}
+              }},
+              {exists: {
+                path: "price_special",
+                score: {
+                  boost: {
+                    value: 3
+                  }
+                }
+              }}
+            ]
+          }
+        }
+      }
+    ]).toArray();
     /** End */
   }
   catch(e) {
@@ -67,9 +90,34 @@ app.get("/autocomplete/:query", async (req, res) => {
   log("/autocomplete", `GET request with param ${req.params.query}`);
   let results = [];
   try {
-    // TODO: Insert the functionality here
-    
+    // TODO: Insert the autocomplete functionality here
+    results = await itemCollection.aggregate([
+      {
+        '$search': {
+          'index': 'autocomplete', 
+          'autocomplete': {
+            'query': req.params.query, 
+            'path': 'name'
+          }, 
+          'highlight': {
+            'path': [
+              'name'
+            ]
+          }
+        }
+      }, {
+        '$limit': 5
+      }, {
+        '$project': {
+          'name': 1, 
+          'highlights': {
+            '$meta': 'searchHighlights'
+          }
+        }
+      }
+    ]).toArray();
     /** End */
+
   }
   catch(e) {
     log("/search", e.toString());
