@@ -2,7 +2,7 @@ const express = require("express");
 const mongodb = require('mongodb');
 const cors = require("cors");
 
-require("dotenv").config()
+require("dotenv").config();
 
 const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -18,7 +18,7 @@ const getMongoDB = async () => {
     const client = await MongoClient.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
     db = await client.db("grocery");
     dbConnected = true;  
-    console.log("Database is connected and ready to go!")
+    console.log("Database is connected and ready to go!");
   } catch (e) {
     console.log(e.toString());
   }
@@ -32,7 +32,7 @@ getMongoDB().then(async _db => {
 });
 
 let app = express();
-app.use(cors())
+app.use(cors());
 
 const log = (route, message) => {
    const now = new Date();
