@@ -7,7 +7,7 @@ export default function SearchView() {
   let [ items, setItems ] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/search/" + query).then(r => r.json()).then(d => {
+    fetch("http://localhost:5050/search/" + query).then(r => r.json()).then(d => {
       debugger;
       setItems(d);
     });
