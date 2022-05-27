@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "http://localhost:5050";
 
 // Perform a "normal search" using $text
 export async function textSearch(query = "") {
