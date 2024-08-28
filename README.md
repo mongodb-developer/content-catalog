@@ -1,5 +1,5 @@
 # Building an Ecommerce Content Catalog with Atlas Search
-Resources for the _Building an Ecommerce Content Catalog with Atlas Search_ article on MongoDB's DevCenter.
+Resources for the _[Building an Ecommerce Content Catalog with Atlas Search](https://www.mongodb.com/developer/products/atlas/building-e-commerce-content-catalog-atlas-search/)_ article on MongoDB's DevCenter.
 
 ## Disclaimer
 
