@@ -15,7 +15,7 @@ const getMongoDB = async () => {
   console.log(`Connecting to database using ${logConnString}`);
   let db;
   try {
-    const client = await MongoClient.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    const client = await MongoClient.connect(MONGODB_URI, {  });
     db = await client.db("grocery");
     dbConnected = true;  
     console.log("Database is connected and ready to go!");
